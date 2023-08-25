@@ -41,7 +41,7 @@ class _InputForm extends State<InputForm> {
             height: 50,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-                color: Color(0XFF76984B),
+                color: Color.fromARGB(255, 110, 56, 1),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
@@ -85,7 +85,7 @@ class _InputForm extends State<InputForm> {
                 },
                 child: Text(
                   'Cancel',
-                  style: style.txtStyle(txtColor: Color(0XFF76984B)),
+                  style: style.txtStyle(txtColor: Color.fromARGB(255, 110, 56, 1)),
                 ),
               ),
               ElevatedButton(
@@ -103,7 +103,7 @@ class _InputForm extends State<InputForm> {
                   style: style.txtStyle(txtColor: Colors.white),
                 ),
                 style: style.btnStyle(
-                    btnWidth: Get.width / 3, btnColor: Color(0XFF76984B)),
+                    btnWidth: Get.width / 3, btnColor: Color.fromARGB(255, 110, 56, 1)),
               )
             ],
           )

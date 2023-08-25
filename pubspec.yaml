@@ -39,6 +39,12 @@ dependencies:
   intl: ^0.18.1
   animations: ^2.0.7
   get: any
+  cloud_firestore: ^4.8.3
+  firebase_core: ^2.15.0
+  image_picker: ^1.0.1
+  path_provider: ^2.0.15
+  firebase_storage: ^11.2.5
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
@@ -105,3 +111,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: 'assets/image/launcher.png'

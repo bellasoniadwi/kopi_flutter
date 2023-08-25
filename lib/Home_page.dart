@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         child: FloatingActionButton(
           onPressed: () => _showAnimatedDialog(context, InputForm()),
           backgroundColor: Colors.white,
-          child: Icon(Icons.add, color: Color(0XFF76984B)),
+          child: Icon(Icons.add, color: Color.fromARGB(255, 110, 56, 1)),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.miniStartDocked,

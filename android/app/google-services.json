@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "507940483635",
+    "project_id": "kopi-sinarindo",
+    "storage_bucket": "kopi-sinarindo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507940483635:android:739c302541350ec03d6946",
+        "android_client_info": {
+          "package_name": "com.example.kopi_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507940483635-37i8bs0016mreesfsckffume10j89shf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl4AaDguKS4ct0bN6NO5zawuN2iQQt1nM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507940483635-37i8bs0016mreesfsckffume10j89shf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

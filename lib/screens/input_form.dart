@@ -46,7 +46,7 @@ class _InputForm extends State<InputForm> {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
             child: Text(
-              'Login',
+              'Form Input Pemantauan Kopi',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -57,12 +57,10 @@ class _InputForm extends State<InputForm> {
             height: 20,
           ),
           InputField(
-            title: 'Email',
-            isSecured: false,
+            title: 'Jenis',
           ),
           InputField(
-            title: 'Password',
-            isSecured: true,
+            title: 'Keterangan',
           ),
           SizedBox(
             height: 20,
@@ -84,7 +82,7 @@ class _InputForm extends State<InputForm> {
                   Get.back();
                 },
                 child: Text(
-                  'Cancel',
+                  'Kembali',
                   style: style.txtStyle(txtColor: Color.fromARGB(255, 110, 56, 1)),
                 ),
               ),
@@ -99,7 +97,7 @@ class _InputForm extends State<InputForm> {
                   Get.back();
                 },
                 child: Text(
-                  'Login',
+                  'Simpan',
                   style: style.txtStyle(txtColor: Colors.white),
                 ),
                 style: style.btnStyle(

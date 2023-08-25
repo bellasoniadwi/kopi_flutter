@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
   String title;
-  bool isSecured;
 
-  InputField({required this.title, required this.isSecured});
+  InputField({required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,6 @@ class InputField extends StatelessWidget {
                     border: Border.all(color: Colors.transparent, width: 0),
                     color: Color.fromARGB(255, 241, 241, 241)),
                 child: TextField(
-                  obscureText: isSecured,
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
                   decoration: InputDecoration(
                       border: InputBorder.none,

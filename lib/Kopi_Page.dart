@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:kopi_flutter/core/color.dart';
 import 'package:kopi_flutter/core/space.dart';
 import 'package:kopi_flutter/core/text_style.dart';
-import 'package:kopi_flutter/screens/input_form.dart';
 import 'package:kopi_flutter/widgets/custom_app_bar.dart';
 import 'package:kopi_flutter/widgets/bar_menu.dart';
 
@@ -140,16 +139,6 @@ class _KopiPageState extends State<KopiPage> {
               child: CircularProgressIndicator(),
             );
           }),
-      floatingActionButton: Container(
-        margin: EdgeInsets.only(bottom: 18.0),
-        child: FloatingActionButton(
-          onPressed: () => _showAnimatedDialog(context, InputForm()),
-          backgroundColor: Colors.white,
-          child: Icon(Icons.add, color: Color.fromARGB(255, 110, 56, 1)),
-        ),
-      ),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniStartDocked,
     );
   }
 

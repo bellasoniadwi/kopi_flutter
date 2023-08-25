@@ -51,7 +51,6 @@ class _RecordPageState extends State<RecordPage> {
                                           streamSnapshot.data!.docs.length,
                                       physics: BouncingScrollPhysics(),
                                       itemBuilder: (context, index) {
-                                        // final plant = plants[index];
                                         final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[index];
                                         return InkWell(
                                           onTap: () {

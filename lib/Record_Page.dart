@@ -7,14 +7,14 @@ import 'package:kopi_flutter/screens/input_form.dart';
 import 'package:kopi_flutter/widgets/custom_app_bar.dart';
 import 'package:kopi_flutter/widgets/bar_menu.dart';
 
-class KopiPage extends StatefulWidget {
-  const KopiPage({Key? key}) : super(key: key);
+class RecordPage extends StatefulWidget {
+  const RecordPage({Key? key}) : super(key: key);
 
   @override
-  _KopiPageState createState() => _KopiPageState();
+  _RecordPageState createState() => _RecordPageState();
 }
 
-class _KopiPageState extends State<KopiPage> {
+class _RecordPageState extends State<RecordPage> {
   final CollectionReference _kopis =
       FirebaseFirestore.instance.collection('kopis');
   @override
@@ -38,9 +38,9 @@ class _KopiPageState extends State<KopiPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Jenis Kopi'),
+                                Text('Catatan Record'),
                                 Text(
-                                  'yang Tersedia ',
+                                  'Pemantauan Kopi',
                                   style: headline1,
                                 ),
                                 Expanded(

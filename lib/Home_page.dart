@@ -5,7 +5,7 @@ import 'package:kopi_flutter/data/plants.dart';
 import 'package:kopi_flutter/screens/input_form.dart';
 import 'package:kopi_flutter/widgets/custom_app_bar.dart';
 import 'package:kopi_flutter/widgets/item_card.dart';
-import 'package:kopi_flutter/widgets/menu_bar.dart';
+import 'package:kopi_flutter/widgets/bar_menu.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Row(
               children: [
-                Menu(),
+                BarMenu(),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(top: 50, left: 35.0, right: 10.0),

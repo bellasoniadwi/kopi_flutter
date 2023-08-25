@@ -4,15 +4,16 @@ import 'package:kopi_flutter/core/text_style.dart';
 import 'package:kopi_flutter/data/menu.dart';
 import 'package:kopi_flutter/widgets/clipper.dart';
 
-class Menu extends StatefulWidget {
-  const Menu({Key? key}) : super(key: key);
+class BarMenu extends StatefulWidget {
+  const BarMenu({Key? key}) : super(key: key);
 
   @override
-  _MenuState createState() => _MenuState();
+  _BarMenuState createState() => _BarMenuState();
 }
 
-class _MenuState extends State<Menu> {
+class _BarMenuState extends State<BarMenu> {
   int selectIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Container(

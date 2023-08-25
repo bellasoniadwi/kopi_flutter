@@ -8,18 +8,18 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.0,
-      padding: EdgeInsets.symmetric(horizontal: 10.0),
+      height: 70.0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             margin: EdgeInsets.only(top: 18.0),
+            alignment: Alignment.center,
             child: TextButton(
               onPressed: () {},
               child: SvgPicture.asset(
                 'assets/icon/scan.svg',
-                height: 50.0,
+                height: 70.0,
                 color: white,
               ),
             ),

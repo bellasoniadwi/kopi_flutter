@@ -17,7 +17,7 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Container(
       width: 85.0,
-      color: green,
+      color: brown,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -69,7 +69,7 @@ class _MenuState extends State<Menu> {
                     color: white,
                     child: Center(
                       child: CircleAvatar(
-                        backgroundColor: green,
+                        backgroundColor: brown,
                         radius: 3,
                       ),
                     ),

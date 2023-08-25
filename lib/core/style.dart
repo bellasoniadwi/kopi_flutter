@@ -4,9 +4,9 @@ import 'package:kopi_flutter/core/color.dart';
 class Styles {
   static ThemeData themeDta() {
     return ThemeData(
-      primaryColor: Colors.green,
+      primaryColor: Colors.brown,
       scrollbarTheme: ScrollbarThemeData(
-        thumbColor: MaterialStateProperty.all(green.withOpacity(0.5)),
+        thumbColor: MaterialStateProperty.all(brown.withOpacity(0.5)),
         isAlwaysShown: true,
         mainAxisMargin: 200,
         radius: Radius.circular(50.0),

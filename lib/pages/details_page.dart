@@ -46,7 +46,7 @@ class _DetailsPageState extends State<DetailsPage> {
         children: [
           Container(
             height: height,
-            color: green,
+            color: brown,
           ),
           Align(
             alignment: Alignment.topCenter,
@@ -68,7 +68,7 @@ class _DetailsPageState extends State<DetailsPage> {
               margin: EdgeInsets.only(right: 10.0, top: 20.0),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: green,
+                color: brown,
               ),
               child: Icon(
                 Icons.favorite_border_outlined,
@@ -114,8 +114,8 @@ class _DetailsPageState extends State<DetailsPage> {
                               width: 6,
                               decoration: BoxDecoration(
                                 color: k == selectImage
-                                    ? green
-                                    : green.withOpacity(0.5),
+                                    ? brown
+                                    : brown.withOpacity(0.5),
                                 borderRadius: BorderRadius.circular(50.0),
                               ),
                             ),

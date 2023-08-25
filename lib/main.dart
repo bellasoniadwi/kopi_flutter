@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kopi_flutter/Home_page.dart';
+import 'package:kopi_flutter/Kopi_Page.dart';
 import 'package:kopi_flutter/core/style.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -14,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Kopi App',
       debugShowCheckedModeBanner: false,
       theme: Styles.themeDta(),
-      home: HomePage(),
+      home: KopiPage(),
     );
   }
 }

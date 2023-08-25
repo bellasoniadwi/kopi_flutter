@@ -5,7 +5,6 @@ class Menu {
 }
 
 List<Menu> menuItems = [
-  Menu(id: 0, name: 'Green Plants'),
-  Menu(id: 1, name: 'Indoor Plants'),
-  Menu(id: 2, name: 'Shape Close'),
+  Menu(id: 0, name: 'Jenis Kopi'),
+  Menu(id: 1, name: 'Record Pemantauan'),
 ];

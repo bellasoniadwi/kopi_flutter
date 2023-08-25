@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kopi_flutter/materials/camera_button.dart';
+import 'package:kopi_flutter/materials/dropdown_field.dart';
 import 'package:kopi_flutter/materials/input_field.dart';
 import 'package:kopi_flutter/materials/style.dart';
 import 'package:get/get.dart';
+import 'package:kopi_flutter/materials/textarea_field.dart';
 
 class InputForm extends StatefulWidget {
   @override
@@ -11,13 +14,16 @@ class InputForm extends StatefulWidget {
 class _InputForm extends State<InputForm> {
   double _dialogHeight = 0.0;
   double _dialogWidth = Get.width;
+  String selectedDropdownValue = '';
+  String textareaValue = '';
+  String imagePath = '';
 
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 50), () {
       setState(() {
-        _dialogHeight = Get.height / 2.9;
+        _dialogHeight = Get.height / 1;
       });
     });
   }
@@ -46,7 +52,7 @@ class _InputForm extends State<InputForm> {
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20))),
             child: Text(
-              'Form Input Pemantauan Kopi',
+              'Record Pemantauan Kopi',
               style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -56,12 +62,27 @@ class _InputForm extends State<InputForm> {
           SizedBox(
             height: 20,
           ),
-          InputField(
-            title: 'Jenis',
-          ),
-          InputField(
-            title: 'Keterangan',
-          ),
+          DropdownField(
+              title: 'Status',
+              options: ['Masuk', 'Izin', 'Sakit'],
+              onChanged: (value) {
+                setState(() {
+                  selectedDropdownValue = value ?? '';
+                });
+              },
+            ),
+            CameraButton(
+              title: 'Upload Foto',
+              onPressed: () {},
+            ),
+          TextareaField(
+              title: 'Keterangan',
+              onChanged: (value) {
+                setState(() {
+                  textareaValue = value;
+                });
+              },
+            ),
           SizedBox(
             height: 20,
           ),
@@ -82,8 +103,9 @@ class _InputForm extends State<InputForm> {
                   Get.back();
                 },
                 child: Text(
-                  'Kembali',
-                  style: style.txtStyle(txtColor: Color.fromARGB(255, 110, 56, 1)),
+                  'Cancel',
+                  style:
+                      style.txtStyle(txtColor: Color.fromARGB(255, 110, 56, 1)),
                 ),
               ),
               ElevatedButton(
@@ -97,11 +119,12 @@ class _InputForm extends State<InputForm> {
                   Get.back();
                 },
                 child: Text(
-                  'Simpan',
+                  'Create',
                   style: style.txtStyle(txtColor: Colors.white),
                 ),
                 style: style.btnStyle(
-                    btnWidth: Get.width / 3, btnColor: Color.fromARGB(255, 110, 56, 1)),
+                    btnWidth: Get.width / 3,
+                    btnColor: Color.fromARGB(255, 110, 56, 1)),
               )
             ],
           )

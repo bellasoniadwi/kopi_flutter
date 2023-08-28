@@ -1,20 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kopi_flutter/core/color.dart';
 import 'package:kopi_flutter/core/space.dart';
 import 'package:kopi_flutter/core/text_style.dart';
-import 'package:kopi_flutter/data/plants.dart';
 
 class DetailsPage extends StatefulWidget {
-  final Plant plant;
-  const DetailsPage({Key? key, required this.plant}) : super(key: key);
+  final DocumentSnapshot? documentSnapshot;
+
+  const DetailsPage({Key? key, this.documentSnapshot}) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  int selectImage = 0;
+  @override
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -32,15 +33,6 @@ class _DetailsPageState extends State<DetailsPage> {
             color: black,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.shopping_cart_outlined,
-              color: black,
-            ),
-          ),
-        ],
       ),
       body: Stack(
         children: [
@@ -51,7 +43,7 @@ class _DetailsPageState extends State<DetailsPage> {
           Align(
             alignment: Alignment.topCenter,
             child: Container(
-              height: height / 1.5,
+              height: height / 1.3,
               decoration: BoxDecoration(
                 color: white,
                 borderRadius: BorderRadius.only(
@@ -85,120 +77,74 @@ class _DetailsPageState extends State<DetailsPage> {
                   height: height / 2.2,
                   child: PageView(
                     physics: BouncingScrollPhysics(),
-                    onPageChanged: (index) {
-                      setState(() {
-                        selectImage = index;
-                      });
-                    },
                     children: [
-                      for (int i = 0; i < widget.plant.images.length; i++)
-                        Image.asset(
-                          widget.plant.images[i],
-                          height: height / 2.2,
-                        )
+                      Image.network(
+                        widget.documentSnapshot?['foto'],
+                        height: height / 2.2,
+                      )
                     ],
                   ),
                 ),
                 SpaceVH(height: 20.0),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 100.0,
-                      child: Column(
-                        children: [
-                          for (int k = 0; k < widget.plant.images.length; k++)
-                            Container(
-                              margin: EdgeInsets.only(bottom: 5.0),
-                              height: k == selectImage ? 20.0 : 6.0,
-                              width: 6,
-                              decoration: BoxDecoration(
-                                color: k == selectImage
-                                    ? brown
-                                    : brown.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 30),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 70.0,
+                        child: Column(
+                          children: [],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.documentSnapshot?['jenis'],
+                              style: headline1,
                             ),
-                        ],
+                            SpaceVH(height: 5.0),
+                            Text(
+                              widget.documentSnapshot?['deskripsi'],
+                              maxLines: 5,
+                              textAlign: TextAlign.justify,
+                            ),
+                            SpaceVH(height: 5.0),
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.plant.name,
-                            style: headline1,
-                          ),
-                          SpaceVH(height: 5.0),
-                          Text(
-                            widget.plant.description,
-                            maxLines: 2,
-                          ),
-                          SpaceVH(height: 20.0),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.plant.price,
-                                style: headline2,
-                              ),
-                              SpaceVH(width: 20.0),
-                              Container(
-                                height: 20.0,
-                                width: 20.0,
-                                decoration: BoxDecoration(
-                                  color: white,
-                                  shape: BoxShape.circle,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: black.withOpacity(0.3),
-                                      blurRadius: 10.0,
-                                      offset: Offset(1, 6),
-                                    ),
-                                  ],
-                                ),
-                                child: Icon(
-                                  Icons.add,
-                                  size: 10,
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: 120.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  bottomTag(
-                    headingText: 'Height',
-                    image: 'height.svg',
-                    text: widget.plant.height,
-                  ),
-                  bottomTag(
-                    headingText: 'Temperature',
-                    image: 'celsius.svg',
-                    text: widget.plant.temp,
-                  ),
-                  bottomTag(
-                    headingText: 'Pot',
-                    image: 'plant-pot.svg',
-                    text: widget.plant.pot,
-                  ),
-                ],
-              ),
-            ),
-          )
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: Container(
+          //     height: 150.0,
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(left: 20, right: 20),
+          //       child: Column(
+          //         crossAxisAlignment: CrossAxisAlignment.start,
+          //         children: [
+          //           Text(
+          //             widget.documentSnapshot?['deskripsi'],
+          //             maxLines: 5,
+          //             style: TextStyle(
+          //                 color: Colors.white,
+          //                 fontWeight: FontWeight.bold,
+          //                 fontSize: 15),
+          //             textAlign: TextAlign.justify,
+          //           ),
+          //           SpaceVH(height: 20.0),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );

@@ -13,8 +13,6 @@ class PlantItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (builder) => DetailsPage(plant: plant)));
       },
       child: Container(
         height: 400.0,

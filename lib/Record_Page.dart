@@ -15,14 +15,14 @@ class RecordPage extends StatefulWidget {
 }
 
 class _RecordPageState extends State<RecordPage> {
-  final CollectionReference _kopis =
-      FirebaseFirestore.instance.collection('kopis');
+  final CollectionReference _records =
+      FirebaseFirestore.instance.collection('records');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
       body: StreamBuilder(
-          stream: _kopis.snapshots(),
+          stream: _records.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
             if (streamSnapshot.hasData) {
               return SafeArea(

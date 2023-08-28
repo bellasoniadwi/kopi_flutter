@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kopi_flutter/materials/style.dart';
 import 'package:get/get.dart';
@@ -14,11 +15,14 @@ class _InputForm extends State<InputForm> {
   String textareaValue = '';
   String imagePath = '';
   String? _selectedValue;
-  List<String> listOfValue = ['Arabika', 'Robusta'];
+  List<String> listOfValue = [];
+  final CollectionReference _kopis = FirebaseFirestore.instance.collection('kopis');
+
 
   @override
   void initState() {
     super.initState();
+    fetchListOfValues();
     Future.delayed(Duration(milliseconds: 50), () {
       setState(() {
         _dialogHeight = Get.height / 2;
@@ -259,5 +263,19 @@ class _InputForm extends State<InputForm> {
         ],
       ),
     );
+  }
+
+  Future<void> fetchListOfValues() async {
+    final snapshot = await FirebaseFirestore.instance.collection('kopis').get();
+    List<String> values = [];
+    snapshot.docs.forEach((doc) {
+      if (doc.exists) {
+        String jenis = doc['jenis'];
+        values.add(jenis);
+      }
+    });
+    setState(() {
+      listOfValue = values;
+    });
   }
 }

@@ -13,7 +13,7 @@ class BarMenu extends StatefulWidget {
 }
 
 class _BarMenuState extends State<BarMenu> {
-  int selectIndex = 0;
+  int selectIndex = -1;
 
   @override
   Widget build(BuildContext context) {

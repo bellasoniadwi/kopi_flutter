@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:kopi_flutter/core/color.dart';
 import 'package:kopi_flutter/core/space.dart';
 import 'package:kopi_flutter/core/text_style.dart';
-import 'package:kopi_flutter/pages/details_page.dart';
 import 'package:kopi_flutter/widgets/custom_app_bar.dart';
 import 'package:kopi_flutter/widgets/bar_menu.dart';
 
@@ -54,13 +53,7 @@ class _KopiPageState extends State<KopiPage> {
                                         // final plant = plants[index];
                                         final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[index];
                                         return InkWell(
-                                          onTap: () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DetailsPage(documentSnapshot: documentSnapshot),
-                                            ),
-                                          ),
+                                          onTap: (){},
                                           child: Container(
                                             height: 400.0,
                                             margin:

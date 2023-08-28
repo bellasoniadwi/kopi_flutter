@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kopi_flutter/Kopi_Page.dart';
-import 'package:kopi_flutter/Record_Page.dart';
 import 'package:kopi_flutter/core/color.dart';
 import 'package:kopi_flutter/core/text_style.dart';
 import 'package:kopi_flutter/data/menu.dart';
@@ -16,13 +14,6 @@ class BarMenu extends StatefulWidget {
 
 class _BarMenuState extends State<BarMenu> {
   int selectIndex = 0;
-  int currentIndex = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    selectIndex = currentIndex;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +29,8 @@ class _BarMenuState extends State<BarMenu> {
               onTap: () {
                 setState(() {
                   selectIndex = i;
-                  navigateToPage(i); // Tambahkan baris ini untuk mengubah halaman saat menu dipilih.
                 });
+                navigateToPage(i);
               },
               index: i,
             ),
@@ -97,16 +88,10 @@ class _BarMenuState extends State<BarMenu> {
   }
 
   void navigateToPage(int index) {
-    setState(() {
-      currentIndex = index;
-      selectIndex = index;
-    });
-
     if (index == 0) {
-      Get.toNamed('/kopi'); 
+      Get.offNamed('/kopi'); // Menggunakan Get.offNamed untuk menghapus halaman sebelumnya.
     } else if (index == 1) {
-      Get.toNamed('/records'); 
+      Get.offNamed('/records');
     }
   }
-
 }

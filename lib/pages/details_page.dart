@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kopi_flutter/Kopi_Page.dart';
 import 'package:kopi_flutter/core/color.dart';
 import 'package:kopi_flutter/core/space.dart';
@@ -34,10 +35,7 @@ class _DetailsPageState extends State<DetailsPage> {
         elevation: 0.0,
         leading: IconButton(
           onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => KopiPage()),
-            ).then((data) {});
+            Get.toNamed('/kopi');
           },
           icon: Icon(
             Icons.arrow_back,

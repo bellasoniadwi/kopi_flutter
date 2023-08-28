@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kopi_flutter/Kopi_Page.dart';
 import 'package:kopi_flutter/Record_Page.dart';
 import 'package:kopi_flutter/core/color.dart';
@@ -98,17 +99,14 @@ class _BarMenuState extends State<BarMenu> {
   void navigateToPage(int index) {
     setState(() {
       currentIndex = index;
+      selectIndex = index;
     });
+
     if (index == 0) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => KopiPage(),
-      ));
+      Get.toNamed('/kopi'); 
     } else if (index == 1) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => RecordPage(),
-      ));
+      Get.toNamed('/records'); 
     }
   }
-
 
 }

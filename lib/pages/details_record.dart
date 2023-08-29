@@ -86,34 +86,89 @@ class _DetailsRecordState extends State<DetailsRecord> {
                   ),
                 ),
                 SpaceVH(height: 20.0),
+                if(widget.documentSnapshot?['feedback'] == '')
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 100.0,
+                        child: Column(
+                          children: [],
+                        ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.documentSnapshot?['jenis'],
+                              style: headline1,
+                            ),
+                            SpaceVH(height: 5.0),
+                            Text(
+                              widget.documentSnapshot?['deskripsi'],
+                              maxLines: 2,
+                            ),
+                            SpaceVH(height: 20.0),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                if(widget.documentSnapshot?['feedback'] != '')
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 100.0,
-                      child: Column(
-                        children: [],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 70.0,
+                        child: Column(
+                          children: [],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.documentSnapshot?['jenis'],
-                            style: headline1,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.documentSnapshot?['jenis'],
+                                style: headline1,
+                              ),
+                              SpaceVH(height: 5.0),
+                              Text(
+                                widget.documentSnapshot?['deskripsi'],
+                                maxLines: 5,
+                                textAlign: TextAlign.justify,
+                              ),
+                              SpaceVH(height: 20.0),
+                            ],
                           ),
-                          SpaceVH(height: 5.0),
-                          Text(
-                            widget.documentSnapshot?['deskripsi'],
-                            maxLines: 2,
-                          ),
-                          SpaceVH(height: 20.0),
-                        ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Feedback',
+                                style: headline1,
+                              ),
+                              SpaceVH(height: 5.0),
+                              Text(
+                                widget.documentSnapshot?['feedback'],
+                                maxLines: 5,
+                                textAlign: TextAlign.justify,
+                              ),
+                              SpaceVH(height: 20.0),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
               ],
             ),
           ),
@@ -146,37 +201,35 @@ class _DetailsRecordState extends State<DetailsRecord> {
                         ),
                       ],
                     ),
-                    Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            final latitude =
-                                widget.documentSnapshot?['latitude'];
-                            final longitude =
-                                widget.documentSnapshot?['longitude'];
-                            final url =
-                                'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
-                            launch(url);
-                          },
-                          child: SvgPicture.asset(
+                    InkWell(
+                      onTap: () {
+                        final latitude = widget.documentSnapshot?['latitude'];
+                        final longitude = widget.documentSnapshot?['longitude'];
+                        final url =
+                            'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+                        launch(url);
+                      },
+                      child: Column(
+                        children: [
+                          SvgPicture.asset(
                             'assets/icon/location.svg',
                             height: 30.0,
                             color: white,
                           ),
-                        ),
-                        SpaceVH(height: 15.0),
-                        Text(
-                          'Lokasi',
-                          style: headline3,
-                        ),
-                        SpaceVH(height: 5.0),
-                        Text(
-                          widget.documentSnapshot?['latitude'] +
-                              ', ' +
-                              widget.documentSnapshot?['longitude'],
-                          style: headline4,
-                        ),
-                      ],
+                          SpaceVH(height: 15.0),
+                          Text(
+                            'Lokasi',
+                            style: headline3,
+                          ),
+                          SpaceVH(height: 5.0),
+                          Text(
+                            widget.documentSnapshot?['latitude'] +
+                                ', ' +
+                                widget.documentSnapshot?['longitude'],
+                            style: headline4,
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

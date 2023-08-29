@@ -6,16 +6,16 @@ import 'package:kopi_flutter/core/color.dart';
 import 'package:kopi_flutter/core/space.dart';
 import 'package:kopi_flutter/core/text_style.dart';
 
-class DetailsPage extends StatefulWidget {
+class DetailsKopi extends StatefulWidget {
   final String? scannedId;
 
-  const DetailsPage({Key? key, this.scannedId}) : super(key: key);
+  const DetailsKopi({Key? key, this.scannedId}) : super(key: key);
 
   @override
-  _DetailsPageState createState() => _DetailsPageState();
+  _DetailsKopiState createState() => _DetailsKopiState();
 }
 
-class _DetailsPageState extends State<DetailsPage> {
+class _DetailsKopiState extends State<DetailsKopi> {
   CollectionReference _kopis = FirebaseFirestore.instance.collection('kopis');
   Stream<DocumentSnapshot>? _kopiStream;
 

@@ -3,7 +3,7 @@ import 'package:kopi_flutter/core/color.dart';
 import 'package:kopi_flutter/core/space.dart';
 import 'package:kopi_flutter/core/text_style.dart';
 import 'package:kopi_flutter/data/plants.dart';
-import 'package:kopi_flutter/pages/details_page.dart';
+import 'package:kopi_flutter/pages/details_kopi.dart';
 
 class PlantItemCard extends StatelessWidget {
   final Plant plant;

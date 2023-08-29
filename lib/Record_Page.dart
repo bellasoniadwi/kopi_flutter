@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kopi_flutter/core/color.dart';
 import 'package:kopi_flutter/core/space.dart';
 import 'package:kopi_flutter/core/text_style.dart';
+import 'package:kopi_flutter/pages/details_record.dart';
 import 'package:kopi_flutter/screens/input_form.dart';
 import 'package:kopi_flutter/widgets/custom_app_bar.dart';
 import 'package:kopi_flutter/widgets/bar_menu.dart';
@@ -54,10 +55,10 @@ class _RecordPageState extends State<RecordPage> {
                                         final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[index];
                                         return InkWell(
                                           onTap: () {
-                                            // Navigator.push(context,
-                                            //   MaterialPageRoute(
-                                            //     builder: (builder) =>
-                                            //       DetailsPage(documentSnapshot: documentSnapshot),));
+                                            Navigator.push(context,
+                                              MaterialPageRoute(
+                                                builder: (builder) =>
+                                                  DetailsRecord(documentSnapshot: documentSnapshot),));
                                           },
                                           child: Container(
                                             height: 400.0,

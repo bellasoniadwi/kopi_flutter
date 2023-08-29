@@ -5,7 +5,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kopi_flutter/auth/signin_screen.dart';
 import 'package:kopi_flutter/core/color.dart';
-import 'package:kopi_flutter/pages/details_page.dart';
+import 'package:kopi_flutter/pages/details_kopi.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -95,7 +95,7 @@ Future<void> scanQR(BuildContext context) async {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => DetailsPage(
+          builder: (context) => DetailsKopi(
             scannedId: barcodeScanRes,
           ),
         ),

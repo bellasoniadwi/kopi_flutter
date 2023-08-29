@@ -90,6 +90,10 @@ flutter:
         - asset: assets/font/SF-Pro-Display-Semibold.ttf
         - asset: assets/font/SF-Pro-Display-Thin.ttf
         - asset: assets/font/SF-Pro-Display-Ultralight.ttf
+
+    - family: Pacifico 
+      fonts:
+        - asset: assets/font/Pacifico-Regular.ttf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

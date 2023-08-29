@@ -207,15 +207,41 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Spacer(),
                         InkWell(
                           onTap: () async {
-                            FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
-                              email: _emailTextController.text,
-                              password: _passwordTextController.text,
-                            )
-                                .then((value) async {
+                            if (_emailTextController.text.isEmpty ||
+                                _passwordTextController.text.isEmpty || _nameTextController.text.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          "Nama, email, dan password harus diisi")));
+                              return;
+                            }
+
+                            if (!_emailTextController.text.contains('@') ||
+                                !_emailTextController.text.contains('.')) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Email tidak valid")),
+                              );
+                              return;
+                            }
+
+                            if (_passwordTextController.text.length < 8) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          "Password minimal harus 8 karakter")));
+                              return;
+                            }
+
+                            try {
+                              await FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                email: _emailTextController.text,
+                                password: _passwordTextController.text,
+                              );
+
                               saveUserDataToFirestore(_nameTextController.text,
                                   _emailTextController.text);
-                              print("Created new account");
+                              print("Membuat akun baru");
 
                               Provider.of<UserData>(context, listen: false)
                                   .updateUserData(_nameTextController.text,
@@ -226,15 +252,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               prefs.setBool('isLoggedIn', true);
 
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => KopiPage()));
-                            }).onError((error, stackTrace) {
-                              print("Error ${error.toString()}");
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => KopiPage()),
+                              );
+                            } catch (error) {
+                              String errorMessage = error.toString();
+                              if (error is FirebaseAuthException) {
+                                if (error.code == 'email-already-in-use') {
+                                  errorMessage = "Email sudah terdaftar";
+                                }
+                              }
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text('${error.toString()}')));
-                            });
+                                SnackBar(content: Text(errorMessage)),
+                              );
+                            }
                           },
                           child: Container(
                             margin: EdgeInsets.only(bottom: 25),
@@ -275,14 +307,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     String? uid = FirebaseAuth.instance.currentUser?.uid;
 
     if (uid != null) {
-      firestore.collection("users").doc(uid).set({
-        "name": name,
-        "email": email,
-        "role": "Petani"
-      }).then((value) {
-        print("User data saved to Firestore");
+      firestore
+          .collection("users")
+          .doc(uid)
+          .set({"name": name, "email": email, "role": "Petani"}).then((value) {
+        print("Data tersimpan di firestore");
       }).catchError((error) {
-        print("Error saving user data to Firestore: $error");
+        print("Data gagal disimpan: $error");
       });
     }
   }

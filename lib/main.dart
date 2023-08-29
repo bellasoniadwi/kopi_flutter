@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
       title: 'Kopi App',
       debugShowCheckedModeBanner: false,
       theme: Styles.themeDta(),
-      // initialRoute: '/kopi', // Atur halaman awal sesuai dengan halaman pertama yang akan ditampilkan.
       getPages: [
         GetPage(name: '/kopi', page: () => KopiPage()),
         GetPage(name: '/records', page: () => RecordPage()),

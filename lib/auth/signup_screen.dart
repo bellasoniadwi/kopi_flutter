@@ -1,16 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:kopi_flutter/Kopi_Page.dart';
 import 'package:kopi_flutter/auth/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:kopi_flutter/auth/signin_screen.dart';
+import 'package:kopi_flutter/data/user_data.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController _nameTextController = TextEditingController();
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailTextController = TextEditingController();
+  bool _isPasswordVisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 3,
-            child: Container(
+      backgroundColor: kBackgroundColor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: MediaQuery.of(context).size.height * 0.3,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage("assets/image/hand.png"),
@@ -19,10 +36,8 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 4,
-            child: Padding(
+            Container(
+              height: MediaQuery.of(context).size.height * 0.6,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: <Widget>[
@@ -30,18 +45,52 @@ class SignUpScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                        "SIGN UP",
+                        "Sign Up",
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 40,
+                            fontSize: 60,
                             fontWeight: FontWeight.bold,
-                            fontFamily: "SF Pro"),
+                            fontFamily: "Pacifico"),
                       ),
                     ],
                   ),
                   Spacer(),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 40),
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: Icon(
+                            Icons.person,
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                        Expanded(
+                            child: TextField(
+                                controller: _nameTextController,
+                                cursorColor: Colors.white,
+                                style: TextStyle(color: kBackgroundColor),
+                                decoration: InputDecoration(
+                                  labelText: 'Nama',
+                                  labelStyle:
+                                      TextStyle(color: kBackgroundColor),
+                                  filled: true,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  fillColor: kPrimaryColor,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: const BorderSide(
+                                        width: 0, style: BorderStyle.none),
+                                  ),
+                                )))
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
@@ -53,12 +102,25 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         Expanded(
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Email Address",
-                            ),
-                          ),
-                        )
+                            child: TextField(
+                                controller: _emailTextController,
+                                cursorColor: Colors.white,
+                                keyboardType: TextInputType.emailAddress,
+                                style: TextStyle(color: kBackgroundColor),
+                                decoration: InputDecoration(
+                                  labelText: 'Email',
+                                  labelStyle:
+                                      TextStyle(color: kBackgroundColor),
+                                  filled: true,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  fillColor: kPrimaryColor,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderSide: const BorderSide(
+                                        width: 0, style: BorderStyle.none),
+                                  ),
+                                )))
                       ],
                     ),
                   ),
@@ -73,12 +135,39 @@ class SignUpScreen extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            hintText: "Password",
-                          ),
-                        ),
-                      ),
+                          child: TextField(
+                              controller: _passwordTextController,
+                              cursorColor: Colors.white,
+                              obscureText: !_isPasswordVisible,
+                              keyboardType: TextInputType.visiblePassword,
+                              style: TextStyle(color: kBackgroundColor),
+                              decoration: InputDecoration(
+                                labelText: 'Password',
+                                labelStyle: TextStyle(color: kBackgroundColor),
+                                filled: true,
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                fillColor: kPrimaryColor,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: const BorderSide(
+                                      width: 0, style: BorderStyle.none),
+                                ),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _isPasswordVisible =
+                                          !_isPasswordVisible; // Toggle password visibility
+                                    });
+                                  },
+                                  child: Icon(
+                                    _isPasswordVisible
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              )))
                     ],
                   ),
                   Spacer(),
@@ -93,7 +182,7 @@ class SignUpScreen extends StatelessWidget {
                               horizontal: 26, vertical: 16),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(25),
-                            color: kPrimaryColor,
+                            color: Colors.white,
                           ),
                           child: InkWell(
                             onTap: () {
@@ -116,24 +205,56 @@ class SignUpScreen extends StatelessWidget {
                           ),
                         ),
                         Spacer(),
-                        Container(
-                          margin: EdgeInsets.only(bottom: 25),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 26, vertical: 16),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: kPrimaryColor,
-                          ),
-                          child: Row(
-                            children: <Widget>[
-                              Text("Lanjutkan",
-                                  style: TextStyle(color: Colors.black)),
-                              SizedBox(width: 10),
-                              Icon(
-                                Icons.arrow_forward,
-                                color: Colors.black,
-                              )
-                            ],
+                        InkWell(
+                          onTap: () async {
+                            FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                              email: _emailTextController.text,
+                              password: _passwordTextController.text,
+                            )
+                                .then((value) async {
+                              saveUserDataToFirestore(_nameTextController.text,
+                                  _emailTextController.text);
+                              print("Created new account");
+
+                              Provider.of<UserData>(context, listen: false)
+                                  .updateUserData(_nameTextController.text,
+                                      _emailTextController.text);
+
+                              final SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setBool('isLoggedIn', true);
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => KopiPage()));
+                            }).onError((error, stackTrace) {
+                              print("Error ${error.toString()}");
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text('${error.toString()}')));
+                            });
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(bottom: 25),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 26, vertical: 16),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: Colors.white,
+                            ),
+                            child: Row(
+                              children: <Widget>[
+                                Text("Lanjutkan",
+                                    style: TextStyle(color: Colors.black)),
+                                SizedBox(width: 10),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.black,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -142,9 +263,27 @@ class SignUpScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  void saveUserDataToFirestore(String name, String email) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+    if (uid != null) {
+      firestore.collection("users").doc(uid).set({
+        "name": name,
+        "email": email,
+        "role": "Petani"
+      }).then((value) {
+        print("User data saved to Firestore");
+      }).catchError((error) {
+        print("Error saving user data to Firestore: $error");
+      });
+    }
   }
 }

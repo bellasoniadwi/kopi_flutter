@@ -7,6 +7,7 @@ import 'package:kopi_flutter/pages/details_record.dart';
 import 'package:kopi_flutter/screens/input_form.dart';
 import 'package:kopi_flutter/widgets/custom_app_bar.dart';
 import 'package:kopi_flutter/widgets/bar_menu.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class RecordPage extends StatefulWidget {
   const RecordPage({Key? key}) : super(key: key);
@@ -19,12 +20,20 @@ class _RecordPageState extends State<RecordPage> {
   final CollectionReference _records =
       FirebaseFirestore.instance.collection('records');
 
-  Future<void> _deleteRecord(String recordId) async {
-    await _records.doc(recordId).delete();
+  Future<void> _deleteRecord(String recordId, String imageUrl) async {
+  await _records.doc(recordId).delete();
 
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Data record kopi berhasil terhapus'), backgroundColor: Color.fromARGB(255, 110, 56, 1)));
+  if (imageUrl.isNotEmpty) {
+    final Reference storageRef = FirebaseStorage.instance.refFromURL(imageUrl);
+    await storageRef.delete();
   }
+
+  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+    content: Text('Data record kopi berhasil terhapus'),
+    backgroundColor: Color.fromARGB(255, 110, 56, 1),
+  ));
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +128,7 @@ class _RecordPageState extends State<RecordPage> {
                                                           child: Icon(Icons.delete, size: 10.0,),
                                                         ),
                                                       ),
-                                                      onTap:() => _deleteRecord(documentSnapshot.id),
+                                                      onTap:() => _deleteRecord(documentSnapshot.id, documentSnapshot['foto']),
                                                     ),
                                                   ],
                                                 ),

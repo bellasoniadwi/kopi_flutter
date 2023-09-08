@@ -18,6 +18,14 @@ class RecordPage extends StatefulWidget {
 class _RecordPageState extends State<RecordPage> {
   final CollectionReference _records =
       FirebaseFirestore.instance.collection('records');
+
+  Future<void> _deleteRecord(String recordId) async {
+    await _records.doc(recordId).delete();
+
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Data record kopi berhasil terhapus'), backgroundColor: Color.fromARGB(255, 110, 56, 1)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,13 +60,19 @@ class _RecordPageState extends State<RecordPage> {
                                           streamSnapshot.data!.docs.length,
                                       physics: BouncingScrollPhysics(),
                                       itemBuilder: (context, index) {
-                                        final DocumentSnapshot documentSnapshot = streamSnapshot.data!.docs[index];
+                                        final DocumentSnapshot
+                                            documentSnapshot =
+                                            streamSnapshot.data!.docs[index];
                                         return InkWell(
                                           onTap: () {
-                                            Navigator.push(context,
-                                              MaterialPageRoute(
-                                                builder: (builder) =>
-                                                  DetailsRecord(documentSnapshot: documentSnapshot),));
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (builder) =>
+                                                      DetailsRecord(
+                                                          documentSnapshot:
+                                                              documentSnapshot),
+                                                ));
                                           },
                                           child: Container(
                                             height: 400.0,
@@ -73,9 +87,41 @@ class _RecordPageState extends State<RecordPage> {
                                                   height: 250.0,
                                                 ),
                                                 SpaceVH(height: 20.0),
-                                                Text(
-                                                  documentSnapshot['jenis'],
-                                                  style: headline2,
+                                                Row(
+                                                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(top: 18.0),
+                                                      alignment:Alignment.center,
+                                                      child: Text(
+                                                        documentSnapshot['jenis'],
+                                                        style: headline2,
+                                                      ),
+                                                    ),
+                                                    GestureDetector(
+                                                      child: Container(
+                                                        margin: EdgeInsets.only(top: 18.0),
+                                                        alignment: Alignment.center,
+                                                        child: Container(
+                                                          height: 20.0,
+                                                          width: 20.0,
+                                                          decoration:BoxDecoration(
+                                                            color: white,
+                                                            shape: BoxShape.circle,
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: brown.withOpacity(0.3),
+                                                                blurRadius: 8.0,
+                                                                offset:Offset(1, 6),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          child: Icon(Icons.delete, size: 10.0,),
+                                                        ),
+                                                      ),
+                                                      onTap:() => _deleteRecord(documentSnapshot.id),
+                                                    ),
+                                                  ],
                                                 ),
                                                 SpaceVH(height: 5.0),
                                                 Text(
